@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriNetX帳號申請</title>
+    <style>
+        :root {
+            /* 定義科技感變數 */
+            --tech-bg: #050b14;
+            --panel-bg: rgba(16, 26, 40, 0.75);
+            --primary-color: #00f2ff;
+            --secondary-color: #0066ff;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --border-color: rgba(0, 242, 255, 0.3);
+            --input-bg: rgba(0, 0, 0, 0.4);
+            --glow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--tech-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 動態科技網格背景 */
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 200%; height: 200%;
+            background-image: linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: -1; opacity: 0.3;
+        }
+        
+        body::after {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 80vw; height: 80vh;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%); z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+        }
+
+        .container {
+            width: 100%; max-width: 600px;
+            background: var(--panel-bg); padding: 40px;
+            border: 1px solid var(--border-color); border-top: 4px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            backdrop-filter: blur(10px); position: relative;
+        }
+
+        .container::before, .container::after {
+            content: ''; position: absolute; width: 10px; height: 10px;
+            border: 2px solid var(--primary-color); transition: all 0.3s ease;
+        }
+        .container::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .container::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        header { text-align: center; margin-bottom: 35px; position: relative; }
+        header h1 {
+            font-size: 28px; color: var(--primary-color); margin-bottom: 10px;
+            letter-spacing: 1px; font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.6);
+        }
+        header p { font-size: 14px; color: var(--text-muted); line-height: 1.6; letter-spacing: 0.5px; }
+        header p span.contact-info {
+            display: block; margin-top: 8px; color: var(--secondary-color);
+            font-weight: 600; font-family: 'Courier New', Courier, monospace;
+        }
+
+        .form-group { margin-bottom: 24px; position: relative; }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+
+        label {
+            display: block; margin-bottom: 8px; font-size: 13px;
+            color: var(--primary-color); text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 600;
+        }
+        label span.required { color: #ff3366; }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%; padding: 14px 15px;
+            background-color: var(--input-bg); border: 1px solid #334455;
+            color: #fff; font-size: 15px;
+            font-family: 'Consolas', 'Monaco', 'Microsoft JhengHei', monospace;
+            transition: all 0.3s ease; border-radius: 0;
+        }
+
+        select {
+            appearance: none; -webkit-appearance: none; -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; cursor: pointer;
+        }
+        option { background-color: #050b14; color: #fff; }
+
+        input:focus, select:focus {
+            outline: none; border-color: var(--primary-color);
+            box-shadow: var(--glow), inset 0 0 10px rgba(0, 242, 255, 0.1);
+            background-color: rgba(0, 20, 30, 0.8);
+        }
+        input::placeholder { color: rgba(255, 255, 255, 0.2); font-family: sans-serif; font-size: 13px; }
+
+        .btn-submit {
+            width: 100%; padding: 16px;
+            background: transparent; color: var(--primary-color);
+            border: 1px solid var(--primary-color); font-size: 16px; font-weight: bold;
+            letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease;
+            margin-top: 15px; text-transform: uppercase; position: relative; overflow: hidden;
+        }
+        .btn-submit:hover {
+            background: var(--primary-color); color: #000;
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+        .btn-submit:active { transform: scale(0.98); }
+
+        footer {
+            margin-top: 30px; text-align: center; font-size: 11px;
+            color: var(--text-muted); font-family: monospace; letter-spacing: 1px; opacity: 0.6;
+        }
+
+        .scanline {
+            width: 100%; height: 100px; z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1; position: absolute; bottom: 100%;
+            animation: scanline 10s linear infinite; pointer-events: none;
+        }
+        @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
+
+        @media (max-width: 480px) {
+            .container { padding: 25px; border-left: none; border-right: none; }
+            .form-row { flex-direction: column; gap: 0; }
+            body::before { animation: none; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <div class="container">
+        <header>
+            <h1>TriNetX帳號申請</h1>
+            <p>
+                僅限奇美醫療體系同仁申請<br>
+                <span class="contact-info">承辦人分機: 52592</span>
+            </p>
+        </header>
+
+        <form name="submit-to-google-sheet">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="campus">院區 <span class="required">*</span></label>
+                    <select id="campus" name="campus" required>
+                        <option value="" disabled selected>SELECT CAMPUS...</option>
+                        <option value="總院">總院</option>
+                        <option value="柳營">柳營</option>
+                        <option value="佳里">佳里</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="department">部門名稱 <span class="required">*</span></label>
+                    <input type="text" id="department" name="department" placeholder="例如：醫學研究部" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="empId">人事號 <span class="required">*</span></label>
+                    <input type="text" id="empId" name="empId" placeholder="00000" required>
+                </div>
+                <div class="form-group">
+                    <label for="chiName">中文姓名 <span class="required">*</span></label>
+                    <input type="text" id="chiName" name="chiName" placeholder="CHI MEI" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="lastName">Last Name <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Wang" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Xiao-Ming" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="name@mail.chimei.org.tw" required>
+            </div>
+
+            <button type="submit" class="btn-submit">INITIALIZE APPLICATION</button>
+        </form>
+        
+        <footer>
+            SYSTEM STATUS: ONLINE<br>
+            &copy; 2025 CMMC RESEARCH DATABASE DIVISION
+        </footer>
+    </div>
+
+    <script>
+        // 您的 Google Script 網址
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwdkyL1SdylIelEfycS-QPwR1wA0739YvaOrhJhmH9acfY657eVaz4hOGnmXLApkvPeJw/exec';
+        
+        const form = document.forms['submit-to-google-sheet'];
+        const btn = document.querySelector('.btn-submit');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            const originalText = btn.innerText;
+            btn.innerText = 'TRANSMITTING DATA...';
+            btn.style.background = 'rgba(0, 242, 255, 0.2)';
+            btn.style.borderColor = 'transparent';
+            btn.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors'})
+                .then(response => {
+                    alert("ACCESS GRANTED: 申請已送出！\n\n系統已接收資料，請留意您的信箱。");
+                    form.reset();
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                    btn.style.background = 'transparent';
+                    btn.style.borderColor = 'var(--primary-color)';
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("連線發生異常，但系統可能已接收資料。請檢查網路狀況。");
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                    btn.style.background = 'transparent';
+                    btn.style.borderColor = 'var(--primary-color)';
+                });
+        });
+    </script>
+</body>
+</html>
