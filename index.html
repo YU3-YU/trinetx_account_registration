@@ -128,12 +128,6 @@
             font-size: 15px; font-family: 'Segoe UI', sans-serif; transition: all 0.3s ease;
         }
 
-        /* 針對驗證錯誤時的樣式 (紅色邊框) */
-        input:invalid:not(:placeholder-shown) {
-            border-color: #ff6b6b;
-            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
-        }
-
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -162,38 +156,60 @@
             color: rgba(255, 255, 255, 0.6); letter-spacing: 1px;
         }
 
-        /* 自定義 Modal 樣式 (保留給「送出成功/失敗」使用) */
+        /* --- 自定義提示視窗 (Custom Modal) 樣式 --- */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
-            display: none; justify-content: center; align-items: center;
-            z-index: 9999; opacity: 0; transition: opacity 0.3s ease;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
+
         .modal-overlay.active { display: flex; opacity: 1; }
+
         .modal-box {
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 16px; padding: 30px; width: 90%; max-width: 450px;
-            text-align: center; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: #fff;
         }
+
         .modal-overlay.active .modal-box { transform: scale(1); }
+
         .modal-icon { font-size: 50px; margin-bottom: 15px; display: block; }
+
         .modal-title {
             font-size: 22px; font-weight: 700; margin-bottom: 10px;
             background: linear-gradient(to right, #fff, #00f2fe);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+
         .modal-message {
-            font-size: 15px; color: rgba(255, 255, 255, 0.9); margin-bottom: 25px; line-height: 1.6; text-align: left;
+            font-size: 15px; color: rgba(255, 255, 255, 0.9); margin-bottom: 25px; line-height: 1.6;
+            text-align: left;
         }
+
         .modal-btn {
             background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
             border: none; padding: 10px 30px; border-radius: 20px; color: #fff;
             font-weight: 600; cursor: pointer; font-size: 15px; transition: all 0.2s;
             box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
         }
+
         .modal-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 117, 252, 0.6); }
+        /* ------------------------------------------- */
 
         @media (max-width: 480px) {
             .container { padding: 30px 20px; }
@@ -250,15 +266,14 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="lastName">Last Name <span class="required">*</span></label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Wang" required>
-                </div>
-                <div class="form-group">
                     <label for="firstName">First Name <span class="required">*</span></label>
                     <input type="text" id="firstName" name="firstName" placeholder="Chi-Mei" required>
                 </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Wang" required>
+                </div>
             </div>
-
             <div class="form-group">
                 <label for="email">Email <span class="required">*</span></label>
                 <input type="email" id="email" name="email" placeholder="cmh@mail.chimei.org.tw" required>
@@ -319,32 +334,31 @@
             }, 300);
         }
 
-        // --- ★★★ 新增：人事號原生氣泡提示邏輯 ★★★ ---
+        // --- 人事號原生氣泡提示邏輯 ---
         const empIdInput = document.getElementById('empId');
 
-        // 1. 輸入時即時檢查，設定自定義錯誤訊息 (但這時還不會跳出氣泡)
+        // 1. 輸入時即時檢查
         empIdInput.addEventListener('input', function() {
             if (this.value.length < 6) {
                 this.setCustomValidity('請輸入正確人事號！');
             } else {
-                this.setCustomValidity(''); // 清除錯誤，視為驗證通過
+                this.setCustomValidity(''); // 清除錯誤
             }
         });
 
-        // 2. 離開欄位 (Blur) 時，觸發 reportValidity() 來顯示氣泡
+        // 2. 離開欄位時觸發氣泡
         empIdInput.addEventListener('blur', function() {
-            // 只有當內容不為空時才顯示錯誤，避免一開始就跳錯
             if (this.value.length > 0) {
                 this.reportValidity();
             }
         });
-        // ----------------------------------------------
+        // ------------------------------
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // 送出時瀏覽器會再次自動檢查所有原生驗證 (包含我們設定的 setCustomValidity)
-            // 如果人事號不對，瀏覽器會自動擋下並跳出氣泡，不會執行下面的程式碼
+            // 送出時，瀏覽器會自動執行 setCustomValidity 的檢查並阻擋
+            // 若驗證通過才會執行以下程式
 
             const originalText = btn.innerText;
             btn.innerText = '處理中 ...';
