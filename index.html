@@ -6,17 +6,24 @@
     <title>奇美體系TriNetX帳號註冊申請</title>
     <style>
         :root {
-            /* 參考圖片配色 */
-            --bg-gradient-1: #4facfe; /* 亮青 */
-            --bg-gradient-2: #00f2fe; /* 螢光青 */
-            --bg-gradient-3: #a18cd1; /* 柔紫 */
-            --bg-gradient-4: #fbc2eb; /* 淺粉紫 */
+            /* 背景漸層 */
+            --bg-gradient-1: #4facfe;
+            --bg-gradient-2: #00f2fe;
+            --bg-gradient-3: #a18cd1;
+            --bg-gradient-4: #fbc2eb;
             
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --text-color: #ffffff;
-            --input-bg: rgba(255, 255, 255, 0.2);
-            --input-focus-border: #00f2fe;
+            /* 清透白色主題 */
+            --glass-bg: rgba(255, 255, 255, 0.6); /* 清透背景 */
+            --glass-border: rgba(255, 255, 255, 0.8);
+            
+            /* 深色文字以確保對比度 */
+            --text-main: #2D3748; /* 深鐵灰 */
+            --text-secondary: #4A5568; /* 次要文字 */
+            --required-color: #DD6B20; /* 亮橘色 */
+            
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --input-border: #E2E8F0;
+            --input-focus-border: #4299E1;
             
             --radius-md: 8px;
         }
@@ -30,7 +37,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            color: var(--text-color);
+            color: var(--text-main);
             overflow-x: hidden;
             position: relative;
             
@@ -50,13 +57,13 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.1));
+            background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: -1;
-            box-shadow: 0 0 60px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 60px rgba(255, 255, 255, 0.2);
             animation: spin 30s linear infinite;
         }
 
@@ -72,9 +79,9 @@
             padding: 45px;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px); /* 強調毛玻璃感 */
+            -webkit-backdrop-filter: blur(15px);
             position: relative;
             animation: fadeIn 0.8s ease-out;
             z-index: 1;
@@ -88,27 +95,31 @@
         header { text-align: center; margin-bottom: 35px; }
 
         .logo-container { margin-bottom: 15px; text-align: center; }
+        
+        /* --- 修改處：恢復原始 Logo 設計 --- */
         .logo-img {
             max-width: 280px; width: 100%; height: auto;
+            /* 強制轉為白色並添加發光效果 */
             filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(0, 242, 254, 0.6));
             transition: all 0.3s ease;
         }
         .logo-img:hover {
+            /* 滑鼠懸停時增強發光 */
             filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(0, 242, 254, 1));
             transform: scale(1.02);
         }
+        /* ---------------------------------- */
         
         header h1 {
-            font-size: 28px; margin-bottom: 10px; font-weight: 700; letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, #dff9fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 28px; margin-bottom: 10px; font-weight: 800; letter-spacing: 1px;
+            color: #1a202c;
         }
-        header p { font-size: 15px; color: rgba(255, 255, 255, 0.85); line-height: 1.6; letter-spacing: 1px; }
+        header p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; font-weight: 500; }
         header p span.contact-info {
             display: inline-block; margin-top: 8px; padding: 4px 12px;
-            background: rgba(0,0,0,0.15); border-radius: 20px; font-size: 13px; font-weight: 500;
+            background: rgba(235, 248, 255, 0.8);
+            border-radius: 20px; font-size: 13px; font-weight: 600;
+            color: #2B6CB0;
         }
 
         .form-row { display: flex; gap: 20px; }
@@ -117,104 +128,75 @@
 
         label {
             display: block; margin-bottom: 8px; font-size: 14px;
-            color: rgba(255, 255, 255, 0.9); font-weight: 600; letter-spacing: 0.5px;
+            color: #2D3748; font-weight: 700;
         }
-        label span.required { color: #ff9ff3; margin-left: 4px; }
+        label span.required { color: var(--required-color); margin-left: 4px; }
 
         input[type="text"], input[type="email"], select {
             width: 100%; padding: 14px 16px;
-            background: var(--input-bg); border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: var(--radius-md); color: #fff;
-            font-size: 15px; font-family: 'Segoe UI', sans-serif; transition: all 0.3s ease;
+            background: var(--input-bg); border: 1px solid var(--input-border);
+            border-radius: var(--radius-md); color: var(--text-main);
+            font-size: 15px; font-family: 'Segoe UI', sans-serif; transition: all 0.2s ease;
         }
 
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat; background-position: right 15px center; background-size: 16px;
         }
-        option { background-color: #5352ed; color: #fff; }
-        input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        option { background-color: #fff; color: #333; }
+        
+        input::placeholder { color: #718096; }
+        
         input:focus, select:focus {
-            outline: none; background: rgba(255, 255, 255, 0.3);
-            border-color: var(--input-focus-border); box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            outline: none; background: #fff;
+            border-color: var(--input-focus-border); 
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.25);
         }
 
         .btn-submit {
             width: 100%; padding: 16px; margin-top: 10px; border: none; border-radius: var(--radius-md);
-            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-            color: white; font-size: 16px; font-weight: 700; letter-spacing: 1px;
-            cursor: pointer; transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: #3182CE;
+            color: white; font-size: 16px; font-weight: 600; letter-spacing: 1px;
+            cursor: pointer; transition: background 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 117, 252, 0.4); }
-        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:hover { background: #2B6CB0; }
+        .btn-submit:active { transform: scale(0.99); }
         .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
         footer {
             margin-top: 30px; text-align: center; font-size: 12px;
-            color: rgba(255, 255, 255, 0.6); letter-spacing: 1px;
+            color: var(--text-secondary); font-weight: 500;
         }
 
-        /* --- 自定義提示視窗 (Custom Modal) 樣式 --- */
+        /* Modal 樣式 */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; transition: opacity 0.3s ease;
         }
-
         .modal-overlay.active { display: flex; opacity: 1; }
-
         .modal-box {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
-            padding: 30px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: #fff;
+            background: #fff;
+            border-radius: 12px; padding: 30px; width: 90%; max-width: 450px;
+            text-align: center; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.95); transition: transform 0.2s; color: #2D3748;
         }
-
         .modal-overlay.active .modal-box { transform: scale(1); }
-
-        .modal-icon { font-size: 50px; margin-bottom: 15px; display: block; }
-
-        .modal-title {
-            font-size: 22px; font-weight: 700; margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #00f2fe);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .modal-message {
-            font-size: 15px; color: rgba(255, 255, 255, 0.9); margin-bottom: 25px; line-height: 1.6;
-            text-align: left;
-        }
-
+        .modal-icon { font-size: 40px; margin-bottom: 15px; display: block; }
+        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #2D3748; }
+        .modal-message { font-size: 15px; color: #4A5568; margin-bottom: 20px; line-height: 1.5; text-align: left; }
         .modal-btn {
-            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-            border: none; padding: 10px 30px; border-radius: 20px; color: #fff;
-            font-weight: 600; cursor: pointer; font-size: 15px; transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+            background: #3182CE; border: none; padding: 10px 30px; border-radius: 6px; color: #fff;
+            font-weight: 600; cursor: pointer; font-size: 14px; width: 100%;
         }
-
-        .modal-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 117, 252, 0.6); }
-        /* ------------------------------------------- */
+        .modal-btn:hover { background: #2C5282; }
 
         @media (max-width: 480px) {
             .container { padding: 30px 20px; }
             .form-row { flex-direction: column; gap: 0; }
-            .decoration-circle { width: 300px; height: 300px; }
         }
     </style>
 </head>
@@ -315,10 +297,8 @@
             
             if (isSuccess) {
                 modalIcon.innerText = "✅";
-                modalIcon.style.textShadow = "0 0 20px #00f2fe";
             } else {
                 modalIcon.innerText = "⚠️";
-                modalIcon.style.textShadow = "0 0 20px #ff9ff3";
             }
 
             modal.style.display = 'flex';
@@ -357,9 +337,6 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // 送出時，瀏覽器會自動執行 setCustomValidity 的檢查並阻擋
-            // 若驗證通過才會執行以下程式
-
             const originalText = btn.innerText;
             btn.innerText = '處理中 ...';
             btn.style.opacity = '0.7';
