@@ -6,24 +6,25 @@
     <title>奇美體系TriNetX帳號註冊申請</title>
     <style>
         :root {
-            /* 背景漸層 */
+            /* 背景漸層配色 */
             --bg-gradient-1: #4facfe;
             --bg-gradient-2: #00f2fe;
             --bg-gradient-3: #a18cd1;
             --bg-gradient-4: #fbc2eb;
             
-            /* 清透白色主題 */
-            --glass-bg: rgba(255, 255, 255, 0.6); /* 清透背景 */
-            --glass-border: rgba(255, 255, 255, 0.8);
+            /* --- 修改處：黃金比例透明度 --- */
+            /* 0.75 的不透明度：既能透出背景的夢幻感，又能像一張白紙一樣襯托藍色 Logo */
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.9);
             
-            /* 深色文字以確保對比度 */
-            --text-main: #2D3748; /* 深鐵灰 */
-            --text-secondary: #4A5568; /* 次要文字 */
-            --required-color: #DD6B20; /* 亮橘色 */
+            /* 文字顏色：深海軍藍，與 Logo 呼應 */
+            --text-main: #1A365D; 
+            --text-secondary: #4A5568;
+            --required-color: #E53E3E;
             
-            --input-bg: rgba(255, 255, 255, 0.8);
-            --input-border: #E2E8F0;
-            --input-focus-border: #4299E1;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --input-border: #CBD5E0;
+            --input-focus-border: #3182CE;
             
             --radius-md: 8px;
         }
@@ -79,9 +80,10 @@
             padding: 45px;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(15px); /* 強調毛玻璃感 */
-            -webkit-backdrop-filter: blur(15px);
+            /* 陰影加深一點點，讓卡片更立體 */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: relative;
             animation: fadeIn 0.8s ease-out;
             z-index: 1;
@@ -96,30 +98,38 @@
 
         .logo-container { margin-bottom: 15px; text-align: center; }
         
-        /* --- 修改處：恢復原始 Logo 設計 --- */
+        /* --- 修改重點：Logo 回歸原始 --- */
         .logo-img {
             max-width: 280px; width: 100%; height: auto;
-            /* 強制轉為白色並添加發光效果 */
-            filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(0, 242, 254, 0.6));
+            
+            /* 1. 移除所有濾鏡：不反白、不變色、不發光 */
+            filter: none;
+            
+            /* 2. 僅添加極其微小的陰影，增加一點點層次感，避免看起來像貼紙 */
+            /* 如果您覺得連這點陰影都不要，可以整行刪除 */
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+            
             transition: all 0.3s ease;
         }
+        
         .logo-img:hover {
-            /* 滑鼠懸停時增強發光 */
-            filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(0, 242, 254, 1));
             transform: scale(1.02);
+            /* 滑鼠懸停時也不變白，只稍微加深陰影 */
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
         }
         /* ---------------------------------- */
         
         header h1 {
             font-size: 28px; margin-bottom: 10px; font-weight: 800; letter-spacing: 1px;
-            color: #1a202c;
+            color: #1A365D; /* 深藍色標題 */
         }
         header p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; font-weight: 500; }
+        
         header p span.contact-info {
             display: inline-block; margin-top: 8px; padding: 4px 12px;
-            background: rgba(235, 248, 255, 0.8);
+            background: #EBF8FF; /* 淺藍色背景 */
             border-radius: 20px; font-size: 13px; font-weight: 600;
-            color: #2B6CB0;
+            color: #2B6CB0; /* 藍色文字 */
         }
 
         .form-row { display: flex; gap: 20px; }
@@ -146,22 +156,22 @@
         }
         option { background-color: #fff; color: #333; }
         
-        input::placeholder { color: #718096; }
+        input::placeholder { color: #A0AEC0; }
         
         input:focus, select:focus {
             outline: none; background: #fff;
             border-color: var(--input-focus-border); 
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.25);
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
         }
 
         .btn-submit {
             width: 100%; padding: 16px; margin-top: 10px; border: none; border-radius: var(--radius-md);
-            background: #3182CE;
+            background: #2B6CB0; /* 深藍色按鈕 */
             color: white; font-size: 16px; font-weight: 600; letter-spacing: 1px;
             cursor: pointer; transition: background 0.2s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .btn-submit:hover { background: #2B6CB0; }
+        .btn-submit:hover { background: #2C5282; }
         .btn-submit:active { transform: scale(0.99); }
         .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
@@ -170,7 +180,7 @@
             color: var(--text-secondary); font-weight: 500;
         }
 
-        /* Modal 樣式 */
+        /* Modal 樣式維持 */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
@@ -189,7 +199,7 @@
         .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #2D3748; }
         .modal-message { font-size: 15px; color: #4A5568; margin-bottom: 20px; line-height: 1.5; text-align: left; }
         .modal-btn {
-            background: #3182CE; border: none; padding: 10px 30px; border-radius: 6px; color: #fff;
+            background: #2B6CB0; border: none; padding: 10px 30px; border-radius: 6px; color: #fff;
             font-weight: 600; cursor: pointer; font-size: 14px; width: 100%;
         }
         .modal-btn:hover { background: #2C5282; }
@@ -284,8 +294,6 @@
         
         const form = document.forms['submit-to-google-sheet'];
         const btn = document.querySelector('.btn-submit');
-        
-        // Modal 相關
         const modal = document.getElementById('customModal');
         const modalIcon = document.getElementById('modalIcon');
         const modalTitle = document.getElementById('modalTitle');
@@ -314,25 +322,20 @@
             }, 300);
         }
 
-        // --- 人事號原生氣泡提示邏輯 ---
+        // --- 人事號檢查 ---
         const empIdInput = document.getElementById('empId');
-
-        // 1. 輸入時即時檢查
         empIdInput.addEventListener('input', function() {
             if (this.value.length < 6) {
                 this.setCustomValidity('請輸入正確人事號！');
             } else {
-                this.setCustomValidity(''); // 清除錯誤
+                this.setCustomValidity(''); 
             }
         });
-
-        // 2. 離開欄位時觸發氣泡
         empIdInput.addEventListener('blur', function() {
             if (this.value.length > 0) {
                 this.reportValidity();
             }
         });
-        // ------------------------------
 
         form.addEventListener('submit', e => {
             e.preventDefault();
